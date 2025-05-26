@@ -15,5 +15,6 @@ class Sensor extends Model
     protected $fillable = [
         'nama_sensor',
         'data',
+        'topic',
     ];
 }

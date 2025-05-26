@@ -53,15 +53,18 @@ class SensorController extends Controller
         $request->validate([
             'nama_sensor' => ['required'],
             'data' => ['required', 'numeric'],
+            'topic' => ['required'],
         ], [
             'nama_sensor.required' => 'Nama sensor harus diisi.',
             'data.required' => 'Data harus diisi.',
             'data.numeric' => 'Data harus berupa angka.',
+            'topic.required' => 'Topic harus diisi.',
         ]);
 
         $sensorData = [
             "nama_sensor" => $request->nama_sensor,
             "data" => $request->data,
+            "topic" => $request->topic,
         ];
 
         // DB::table('sensors')->insert($sensorData);
@@ -81,13 +84,20 @@ class SensorController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_sensor' => 'required',
-            'data' => 'required',
+            'nama_sensor' => ['required'],
+            'data' => ['required', 'numeric'],
+            'topic' => ['required'],
+        ],[
+            'nama_sensor.required' => 'Nama sensor harus diisi.',
+            'data.required' => 'Data harus diisi.',
+            'data.numeric' => 'Data harus berupa angka.',
+            'topic.required' => 'Topic harus diisi.',
         ]);
 
         $sensorData = [
             'nama_sensor' => $request->nama_sensor,
-            'data' => $request->data
+            'data' => $request->data,
+            'topic' => $request->topic
         ];
 
         // DB::table('sensors')

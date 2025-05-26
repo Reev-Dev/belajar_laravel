@@ -34,6 +34,14 @@
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="input-icon mt-2">
+                            <input type="text" class="form-control @error('topic') is-invalid @enderror" id="topic"
+                                name="topic" value="{{ old('topic', $sensor->topic) }}" placeholder="Topic" autofocus
+                                autocomplete="off">
+                            @error('topic')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="card-footer">
                         <div class="row align-items-center justify-content-end">

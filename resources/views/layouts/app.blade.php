@@ -28,7 +28,7 @@
 <body>
     <div class="app">
         <main class="min-h-screen">
-            @include('sensor.partials.nav')
+            @include('partials.nav')
             @yield('content')
         </main>
     </div>

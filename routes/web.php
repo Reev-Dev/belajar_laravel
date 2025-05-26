@@ -35,5 +35,6 @@ Route::controller(DeviceController::class)->group( function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'viewLogin')->name('login');
+    Route::get('/login', 'viewLogin')->name('auth.viewLogin');
+    Route::get('/register', 'viewRegister')->name('auth.viewRegister');
 });
