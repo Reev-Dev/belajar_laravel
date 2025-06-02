@@ -65,7 +65,7 @@ class DeviceController extends Controller
         return redirect()->route('device.index')->with('success', 'Data device berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
         $devices = Device::findOrFail($id);
         $devices->delete();

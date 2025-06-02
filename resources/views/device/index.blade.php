@@ -29,7 +29,7 @@
                                     <td class="flex gap-2">
                                         <a href="{{ route('device.edit', $item->id) }}" class="btn btn-primary">
                                             Edit</a>
-                                        <form action="" method="POST"
+                                        <form action="{{ route('device.delete', $item->id) }}" method="POST"
                                             onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                             @csrf
                                             @method('DELETE')

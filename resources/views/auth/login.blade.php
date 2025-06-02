@@ -21,11 +21,20 @@
             <div class="card card-md">
                 <div class="card-body">
                     <h2 class="h2 text-center mb-4">Login to your account</h2>
-                    <form action="" method="post">
+                    @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
+                    @endif
+                    <form action="/login" method="post">
+                        @csrf
+                        @method('POST')
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" id="username" name="username" class="form-control" autocomplete="off"
-                                placeholder="Your username" />
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" autocomplete="email"
+                                placeholder="Your Email" />
                         </div>
                         <div class="mb-2">
                             <label for="password" class="form-label">

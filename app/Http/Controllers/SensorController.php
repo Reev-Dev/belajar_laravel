@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sensor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SensorController extends Controller
@@ -110,7 +111,7 @@ class SensorController extends Controller
         return redirect()->route('sensor.index')->with('success', 'Data sensor berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
         // DB::table('sensors')
         //     ->where('id', $id)

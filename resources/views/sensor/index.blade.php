@@ -2,11 +2,24 @@
 
 @section('content')
     <div class="container custom-container my-3">
-        <div class="d-flex justify-content-between mt-4">
+        <div class="d-flex justify-content-between my-4">
             <h1>Data Sensor </h1>
             <a href="/sensor/create" class="btn btn-primary btn-5 d-none d-sm-inline-block">
                 Tambah Data Sensor
             </a>
+        </div>
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <div class="alert-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon alert-icon icon-2">
+                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                    <path d="M12 9h.01"></path>
+                    <path d="M11 12h1v4h1"></path>
+                </svg>
+            </div>
+            Selamat datang {{ auth()->user()->name }}
+            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
         </div>
         @session('success')
             <div class="alert alert-success mt-4 justify-between" role="alert">
@@ -47,7 +60,7 @@
                                     <td class="flex gap-2">
                                         <a href="{{ route('sensor.edit', $item->id) }}" class="btn btn-primary">
                                             Edit</a>
-                                        <form action="{{ route('sensor.destroy', $item->id) }}" method="POST"
+                                        <form action="{{ route('sensor.delete', $item->id) }}" method="POST"
                                             onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                             @csrf
                                             @method('DELETE')
