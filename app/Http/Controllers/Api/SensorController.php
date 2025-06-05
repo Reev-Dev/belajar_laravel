@@ -44,7 +44,8 @@ class SensorController extends Controller
             "topic.required" => "Topic harus diisi",
         ]);
 
-        if(!$validatedData->fails())
+        try {
+            if(!$validatedData->fails())
         {
             $sensor = Sensor::create([
                 "nama_sensor" => $request->nama_sensor,
@@ -52,14 +53,32 @@ class SensorController extends Controller
                 "topic" => $request->topic,
             ]);
 
-            return response()->json([
-                "status" => "success",
-                "code" => 201,
-                "message" => "Berhasil menyimpan data sensor",
-                "data" => $sensor,
-            ], 201);
+            if($sensor)
+            {
+                return response()->json([
+                    "status" => "success",
+                    "code" => 201,
+                    "message" => "Berhasil menyimpan data sensor",
+                    "data" => $sensor,
+                ], 201);
+            } else{
+                return response()->json([
+                    "status" => "failed",
+                    "code" => 500,
+                    "message" => "Gagal menyimpan data sensor",
+                    "data" => $sensor,
+                ], 500);
+            }
         } else 
         {
+            return response()->json([
+                "status" => "failed",
+                "code" => 422,
+                "message" => "Gagal menyimpan data sensor",
+                "data" => $validatedData->errors(),
+        ], 422);
+        }
+        } catch (\Exception $e) {
             return response()->json([
                 "status" => "failed",
                 "code" => 500,
@@ -67,5 +86,7 @@ class SensorController extends Controller
                 "data" => null,
         ], 500);
         }
+
+        
     }
 }
