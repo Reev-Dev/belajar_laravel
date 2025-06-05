@@ -57,7 +57,7 @@
                                     <td>{{ $item->nama_sensor }}</td>
                                     <td class="text-secondary">{{ $item->data }}</td>
                                     <td class="text-secondary">{{ $item->topic }}</td>
-                                    <td class="flex gap-2">
+                                    <td class="d-flex flex-col gap-2">
                                         <a href="{{ route('sensor.edit', $item->id) }}" class="btn btn-primary">
                                             Edit</a>
                                         <form action="{{ route('sensor.delete', $item->id) }}" method="POST"

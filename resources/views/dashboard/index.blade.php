@@ -91,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <div class="row row-cards">
                             <div class="col-sm-6 col-lg-3">
                                 <div class="card card-sm">
@@ -191,7 +191,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
