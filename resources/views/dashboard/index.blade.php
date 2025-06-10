@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <div class="subheader">Suhu</div>
                                 <div class="d-flex align-items-baseline">
-                                    <div class="h1 mb-0 me-2">75⁰C</div>
+                                    <div class="h1 mb-0 me-2" id="suhu">?⁰C</div>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                             <div class="card-body">
                                 <div class="subheader">Kelembaban</div>
                                 <div class="d-flex align-items-baseline mb-2">
-                                    <div class="h1 mb-0 me-2">60%</div>
+                                    <div class="h1 mb-0 me-2" id="kelembaban">?%</div>
                                 </div>
                             </div>
                         </div>
@@ -41,8 +41,8 @@
                                 <div class="d-flex align-items-center">
                                     <div class="subheader">Servo</div>
                                 </div>
-                                <div class="h1 mb-3" id="servo-text">40⁰</div>
-                                <input type="range" class="form-range mb-2" value="40" min="0" max="180"
+                                <p class="h1 mb-3" id="servo-text">?⁰</p>
+                                <input type="range" class="form-range mb-2" min="0" max="180"
                                     name="servo-slider" id="servo-slider">
                             </div>
                         </div>
@@ -79,19 +79,20 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($devices as $device)
-                                        <tr>
-                                            <td>
-                                                {{ $device->serial_number }}
-                                            </td>
-                                            <td class="text-green">Online</td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    {{ $device->serial_number }}
+                                                </td>
+                                                <td id="lab1/serial_number/{{ $device->serial_number }}">
+                                                    ?</td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <div class="row row-cards">
                             <div class="col-sm-6 col-lg-3">
                                 <div class="card card-sm">
@@ -191,12 +192,66 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script>
+        const clientId = Math.random().toString(16).substr(2, 8);
+        const host = "wss://broker.emqx.io:8084/mqtt";
+
+        const option = {
+            keepalive: 30,
+            clientId: clientId,
+            protocolId: "MQTT",
+            protocolVersion: 4,
+            clean: true,
+            reconnectPeriod: 1000,
+            connectTimeout: 30 * 100,
+        }
+
+        console.log("Connecting to broker...");
+        const client = mqtt.connect(host, option);
+        client.subscribe("lab1/#", {
+            qos: 1
+        });
+
+        client.on("connect", () => {
+            console.log("Connected to broker!");
+        })
+
+        client.on("message", (topic, message) => {
+            if (topic === "lab1/suhu") {
+                document.getElementById("suhu").innerHTML = message + " °C";
+            }
+            if (topic === "lab1/kelembaban") {
+                document.getElementById("kelembaban").innerHTML = message + " %";
+            }
+            if (topic === "lab1/lcd") {
+                document.getElementById("input-lcd").value = message;
+            }
+            if (topic === "lab1/servo") {
+                document.getElementById("servo-text").innerHTML = message;
+                document.getElementById("servo-slider").value = parseInt(message);
+            }
+
+            @foreach ($devices as $item)
+                if (topic === "lab1/serial_number/{{ $item->serial_number }}") {
+                    document.getElementById("lab1/serial_number/{{ $item->serial_number }}").innerHTML = message;
+                    if (message.toString() === "Online") {
+                        document.getElementById("lab1/serial_number/{{ $item->serial_number }}").style.color =
+                            "green";
+                    } else {
+                        document.getElementById("lab1/serial_number/{{ $item->serial_number }}").style.color =
+                            "red";
+                    }
+                }
+            @endforeach
+        })
+    </script>
     <script>
         const servoSlider = document.getElementById('servo-slider');
         const textServo = document.getElementById('servo-text');
@@ -204,6 +259,13 @@
         servoSlider.addEventListener('input', () => {
             textServo.textContent = `${servoSlider.value}⁰`;
         })
+        servoSlider.addEventListener('mouseup', () => {
+            client.publish("lab1/servo", textServo.innerHTML.toString(), {
+                qos: 1,
+                retain: true
+            });
+        })
+
 
         const btnLcd = document.getElementById('btn-lcd');
         const inputLcd = document.getElementById('input-lcd');
@@ -215,6 +277,10 @@
                 alert('Input tidak boleh kosong');
             } else {
                 alert(`text value ${textValue}`);
+                client.publish("lab1/lcd", textValue.toString(), {
+                    qos: 1,
+                    retain: true
+                });
             }
         });
     </script>

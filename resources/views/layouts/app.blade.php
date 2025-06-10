@@ -17,7 +17,6 @@
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{{ asset('dist/css/tabler.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/demo.min.css') }}">
 
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -371,7 +370,6 @@
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
     </script>
     <script src="{{ asset('dist/js/tabler.min.js') }}"></script>
-    <script src="{{ asset('dist/js/demo.min.js') }}"></script>
     <script src="{{ asset('dist/js/tabler.js') }}"></script>
 </body>
 
