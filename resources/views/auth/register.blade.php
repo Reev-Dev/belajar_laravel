@@ -11,6 +11,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
     <link rel="stylesheet" href="{{ asset('dist/css/tabler.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/demo.min.css') }}">
 </head>
@@ -32,7 +33,8 @@
                     @endif
                     <div class="mb-3">
                         <label class="form-label">Name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter name" autocomplete="name">
+                        <input type="text" id="name" name="name" class="form-control"
+                            placeholder="Enter name" autocomplete="name">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -53,8 +55,8 @@
                             Password Confirmation
                         </label>
                         <div class="input-group input-group-flat">
-                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"
-                                placeholder="" autocomplete="off" />
+                            <input type="password" id="password_confirmation" name="password_confirmation"
+                                class="form-control" placeholder="" autocomplete="off" />
                         </div>
                     </div>
                     <div class="mb-3">

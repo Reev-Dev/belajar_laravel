@@ -26,7 +26,7 @@
                                     <td>{{ $loop->iteration + ($devices->currentPage() - 1) * $devices->perPage() }}</td>
                                     <td>{{ $item->serial_number }}</td>
                                     <td class="text-secondary">{{ $item->meta_data }}</td>
-                                    <td class="flex gap-2">
+                                    <td class="d-flex flex-col gap-2">
                                         <a href="{{ route('device.edit', $item->id) }}" class="btn btn-primary">
                                             Edit</a>
                                         <form action="{{ route('device.delete', $item->id) }}" method="POST"

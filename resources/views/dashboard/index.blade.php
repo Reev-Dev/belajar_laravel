@@ -56,7 +56,7 @@
                                 <div class="h1 mb-3" id="servo-text">LCD</div>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="text-lcd" id="input-lcd"
-                                        placeholder="Input">
+                                        placeholder="Input" autofocus autocomplete="off">
                                     <button type="button" class="btn btn-primary" id="btn-lcd">
                                         Send
                                     </button>
@@ -201,13 +201,15 @@
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <script>
         const clientId = Math.random().toString(16).substr(2, 8);
-        const host = "wss://broker.emqx.io:8084/mqtt";
+        const host = "wss://siot-laravel.cloud.shiftr.io:443/mqtt";
 
         const option = {
             keepalive: 30,
             clientId: clientId,
             protocolId: "MQTT",
             protocolVersion: 4,
+            username: "SIoT_Laravel",
+            password: "tokenwebapp",
             clean: true,
             reconnectPeriod: 1000,
             connectTimeout: 30 * 100,

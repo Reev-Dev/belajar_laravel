@@ -11,6 +11,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
     <link rel="stylesheet" href="{{ asset('dist/css/tabler.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/demo.min.css') }}">
 </head>
@@ -33,8 +34,8 @@
                         @method('POST')
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" name="email" class="form-control" autocomplete="email"
-                                placeholder="Your Email" />
+                            <input type="email" id="email" name="email" class="form-control"
+                                autocomplete="email" placeholder="Your Email" />
                         </div>
                         <div class="mb-2">
                             <label for="password" class="form-label">
