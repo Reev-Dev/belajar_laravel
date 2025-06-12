@@ -21,7 +21,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($devices as $item)
+                            @forelse ($devices as $item)
                                 <tr>
                                     <td>{{ $loop->iteration + ($devices->currentPage() - 1) * $devices->perPage() }}</td>
                                     <td>{{ $item->serial_number }}</td>
@@ -37,7 +37,11 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="11" class="text-center mb-[-3]">Tidak ada data</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

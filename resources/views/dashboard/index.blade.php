@@ -208,7 +208,7 @@
             clientId: clientId,
             protocolId: "MQTT",
             protocolVersion: 4,
-            username: "SIoT_Laravel",
+            username: "siot-laravel",
             password: "tokenwebapp",
             clean: true,
             reconnectPeriod: 1000,

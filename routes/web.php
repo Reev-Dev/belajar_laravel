@@ -4,20 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\SensorController;
-use App\Http\Middleware\AuthCheck;
-use App\Http\Middleware\isAdmin;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiswaController;
-
-// Route::view('/', 'welcome');
-
-Route::controller(SiswaController::class)->group(function () {
-    Route::get('/siswa', 'index')->name('siswa.index');
-    Route::get('/siswa/create', 'create')->name('siswa.create');
-    Route::post('/siswa', 'store')->name('siswa.store');
-});
-
-// Route::get('/sensor', [SensorController::class, 'index']);
 
 Route::middleware('auth-check')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -42,8 +29,6 @@ Route::middleware('is-admin')->group( function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-//     Route::get('/login', 'viewLogin')->name('auth.viewLogin');
-//     Route::get('/register', 'viewRegister')->name('auth.viewRegister');
         Route::get('/change-password', 'viewChangePassword')->name('auth.viewChangePassword');
         Route::post('/change-password', 'changePassword')->name('auth.changePassword');
 });

@@ -9,7 +9,7 @@ class DeviceController extends Controller
 {
     public function index()
     {
-        $devices = Device::orderBy('id', 'asc')->paginate(10);
+        $devices = Device::orderBy('id', 'asc')->paginate(5);
         return view('device.index', compact('devices'));
     }
 
